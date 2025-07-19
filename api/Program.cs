@@ -3,13 +3,17 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using api.Controllers;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "FinShark API", Version = "v1" });
+});
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(StockController).Assembly);
 
@@ -31,7 +35,10 @@ foreach (var name in controllerTypes)
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => 
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "FinShark API V1");
+    });
 }
 app.UseHttpsRedirection();
 app.MapControllers();
