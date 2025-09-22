@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.Dtos.Comment;
 
 namespace api.Dtos.Stock
 {
@@ -14,5 +15,6 @@ namespace api.Dtos.Stock
         public long MarketCup { get; internal set; }
         public int Id { get; internal set; }
         public string Industry { get; internal set; }
+        public List<CommentDto> Comments { get; set; }
     }
 }

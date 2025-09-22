@@ -6,6 +6,7 @@ using api.Controllers;
 using Microsoft.OpenApi.Models;
 using api.Interfaces;
 using api.Repository;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +19,10 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(StockController).Assembly);
-
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(options =>
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+    );
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -46,6 +50,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 app.UseHttpsRedirection();
+
 app.MapControllers();
 app.Run();
 
