@@ -31,12 +31,12 @@ namespace api.Controllers
             var stockDto = stocks.Select(s => s.ToStockDto());
 
             return Ok(stocks);
-        }
+        } 
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var stock = await _context.Stocks.FindAsync(id);
+            var stock = await _stockRepo.GetByIdAsync(id);
             if (stock == null)
             {
                 return NotFound();

@@ -174,3 +174,5 @@ E:\MyProject\FinShark\api\bin\Debug\net9.0\Microsoft.AspNetCore.JsonPatch.dll
 E:\MyProject\FinShark\api\bin\Debug\net9.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 E:\MyProject\FinShark\api\bin\Debug\net9.0\Newtonsoft.Json.dll
 E:\MyProject\FinShark\api\bin\Debug\net9.0\Newtonsoft.Json.Bson.dll
+E:\MyProject\FinShark\api\bin\Debug\net9.0\System.Formats.Asn1.dll
+E:\MyProject\FinShark\api\bin\Debug\net9.0\System.Text.Json.dll
