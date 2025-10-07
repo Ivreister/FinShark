@@ -11,28 +11,6 @@ namespace api.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Comments_Stock_StockId",
-                table: "Comments");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Stock",
-                table: "Stock");
-
-            migrationBuilder.RenameTable(
-                name: "Stock",
-                newName: "Stocks");
-
-            migrationBuilder.RenameColumn(
-                name: "MarketCup",
-                table: "Stocks",
-                newName: "MarketCap");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Stocks",
-                table: "Stocks",
-                column: "Id");
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -49,6 +27,7 @@ namespace api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
+                
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),

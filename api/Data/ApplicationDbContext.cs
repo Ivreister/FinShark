@@ -18,5 +18,18 @@ namespace api.Data
         }
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<Comment> Comments { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder); 
+            
+            modelBuilder.Entity<Stock>().ToTable("Stocks");
+            modelBuilder.Entity<Comment>().ToTable("Comments");
+            
+            modelBuilder.Entity<Stock>()
+                .HasMany(s => s.Comments)
+                .WithOne(c => c.Stock)
+                .HasForeignKey(c => c.StockId);
+        }
     }
 }
