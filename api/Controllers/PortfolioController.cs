@@ -36,5 +36,39 @@ namespace api.Controllers
             return Ok(userPortfolio);
 
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddPortfolio(string symbol)
+        {
+            var userName = User.GetUserName();
+            var appUser = await _userManager.FindByNameAsync(userName);
+            var stock = await _stockRepository.GetBySymbolAsync(symbol);
+
+            if(stock == null) return 
+                BadRequest("Stock not found");
+
+            var userPortfolio = await _portfolioRepo.GetUserPortfolio(appUser);
+
+            if(userPortfolio.Any(e => e.Symbol.ToLower() == symbol.ToLower()))
+                return BadRequest("Cannot add same stock to portfolio");
+
+            var PortfolioModel = new Portfolio
+            {
+                StockId = stock.Id,
+                AppUserId = appUser.Id
+            };
+
+            await _portfolioRepo.CreaateAsync(PortfolioModel);
+
+            if(PortfolioModel == null)
+            {
+                return StatusCode(500, "Could not create");
+            }
+            else
+            {
+                return Created();
+            }
+        }
     }
 }
