@@ -80,7 +80,7 @@ namespace api.Controllers
                 stock = await _fmpService.FindStockBySymbolAsync(symbol);
                 if(stock == null)
                 {
-                    return BadRequest("This stock does not exist");
+                    return BadRequest("Stock does not exist");
                 }
                 else
                 {

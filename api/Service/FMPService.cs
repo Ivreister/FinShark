@@ -22,8 +22,8 @@ namespace api.Service
         public async Task<Stock> FindStockBySymbolAsync(string symbol)
         {
             try
-            {
-                var result = await _httpClient.GetAsync($"https://financialmodelingprep.com/stable/search-{symbol}?apikey={_config["FMPKey"]}");
+            {                               //var url = $"https://financialmodelingprep.com/stable/profile?symbol={symbol.ToUpper()}&apikey={_config["FMPKey"]}";
+                var result = await _httpClient.GetAsync($"https://financialmodelingprep.com/stable/profile?symbol={symbol.ToUpper()}&apikey={_config["FMPKey"]}");
                 if(result.IsSuccessStatusCode)
                 {
                     var content = await result.Content.ReadAsStringAsync();

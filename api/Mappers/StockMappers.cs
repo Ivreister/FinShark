@@ -34,7 +34,7 @@ namespace api.Mappers
             };
         }
 
-                public static Stock ToStockFromFMP(this FMPStock fmpStock)
+        public static Stock ToStockFromFMP(this FMPStock fmpStock)
         {
             return new Stock
             {
